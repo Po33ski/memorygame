@@ -1,0 +1,29 @@
+.item {
+  list-style-type: none;
+  display: block;
+  align-items: center;
+  font-size: 32px;
+
+  cursor: pointer;
+  min-width: 40px;
+  min-height: 40px;
+  border: solid 1px;
+  border-radius: 5px;
+}
+
+.done {
+  background-color: blanchedalmond;
+}
+
+/*
+.item {
+  list-style-type: none;
+  display: block;
+  align-items: center;
+  gap: 2px;
+  margin-top: 16px;
+  padding-top: 16px;
+  min-width: 200px;
+  min-height: 200px;
+}
+*/
