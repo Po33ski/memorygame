@@ -4,24 +4,24 @@ import styles from "./Board.module.css";
 
 export function Board({ itemsEmojis, setItemsEmojis, reset, setWin }) {
   const [checkedEmojis, setCheckedEmojis] = useState([]);
-  const [LastItems, setLastItems] = useState({ first: null, second: null });
+  const [lastItems, setLastItems] = useState({ first: null, second: null });
   const [specState, setSpecState] = useState(false);
 
   useEffect(() => {
     if (specState) {
       if (
-        LastItems.first.emoji === LastItems.second.emoji &&
-        LastItems.first.id !== LastItems.second.id
+        lastItems.first.emoji === lastItems.second.emoji &&
+        lastItems.first.id !== lastItems.second.id
       ) {
         setCheckedEmojis((prevChecked) => [
-          LastItems.first.emoji,
+          lastItems.first.emoji,
           ...prevChecked,
         ]);
         setItemsEmojis((prevEmojis) =>
           prevEmojis.map((item) => {
             if (
               checkedEmojis.includes(item.emoji) ||
-              item.emoji === LastItems.second.emoji
+              item.emoji === lastItems.second.emoji
             ) {
               return {
                 ...item,
@@ -37,8 +37,8 @@ export function Board({ itemsEmojis, setItemsEmojis, reset, setWin }) {
         );
         setSpecState(false);
       } else if (
-        LastItems.first.emoji !== LastItems.second.emoji &&
-        LastItems.first.id !== LastItems.second.id
+        lastItems.first.emoji !== lastItems.second.emoji &&
+        lastItems.first.id !== lastItems.second.id
       ) {
         setTimeout(() => {
           setItemsEmojis((prevEmojis) =>
@@ -56,7 +56,7 @@ export function Board({ itemsEmojis, setItemsEmojis, reset, setWin }) {
               };
             })
           );
-          setSpecState(false); // it has to be here because it sync displaying of items
+          setSpecState(false); // it has to be here because it synchronizes displaying of items
         }, 1000);
       }
     }
@@ -65,7 +65,7 @@ export function Board({ itemsEmojis, setItemsEmojis, reset, setWin }) {
     }
     console.log("CheckedEmojis:", checkedEmojis);
     console.log("SpecState:", specState);
-    //setSpecState(false);
+
     setLastItems({ first: null, second: null });
   }, [specState]);
 
@@ -82,18 +82,18 @@ export function Board({ itemsEmojis, setItemsEmojis, reset, setWin }) {
           if (prevItem.id !== id) {
             return prevItem;
           }
-          if (LastItems.first === null) {
+          if (lastItems.first === null) {
             setLastItems({
               first: { id, emoji, isPaired, isClicked },
               second: null,
             });
           } else if (
-            LastItems.first !== null &&
-            LastItems.second === null &&
-            LastItems.first.id !== id
+            lastItems.first !== null &&
+            lastItems.second === null &&
+            lastItems.first.id !== id
           ) {
             const tempLastItem = {
-              first: LastItems.first,
+              first: lastItems.first,
               second: { id, emoji, isPaired, isClicked },
             };
             setLastItems(tempLastItem);
